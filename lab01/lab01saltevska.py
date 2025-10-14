@@ -7,7 +7,6 @@ def analyze_password(password, name, birth_date):
     # Розділяємо дату народження на день, місяць і рік
     day, month, year_full = birth_date.split('.')
     date_parts = [day, month, year_full]
-
     # Перевіряємо, чи міститься ім'я в паролі
     name_in_password = name.lower() in password.lower()
     # Перевіряємо, чи міститься будь-яка частина дати народження в паролі
