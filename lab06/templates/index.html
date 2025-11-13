@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна Робота 6</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .container { display: flex; gap: 40px; }
+        .box { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        .results { margin-top: 20px; }
+        li { background-color: #f4f4f4; margin-bottom: 5px; padding: 5px;}
+    </style>
+</head>
+<body>
+    <h1>Тестування SQL-ін’єкцій</h1>
+
+    <div class="container">
+        <div class="box">
+            <h2>☠️ Вразливий Пошук</h2>
+            <p>Використовує "склеювання" рядків.</p>
+            <form action="/search_vulnerable" method="POST">
+                <label for="name_vul">Пошук за ім'ям:</label>
+                <input type="text" id="name_vul" name="name">
+                <input type="submit" value="Шукати">
+            </form>
+        </div>
+
+        <div class="box">
+            <h2>✅ Безпечний Пошук</h2>
+            <p>Використовує параметризовані запити (?).</p>
+            <form action="/search_secure" method="POST">
+                <label for="name_sec">Пошук за ім'ям:</label>
+                <input type="text" id="name_sec" name="name">
+                <input type="submit" value="Шукати">
+            </form>
+        </div>
+    </div>
+
+    <div class="results">
+        {% if search_type %}
+            <h3>Результати для "{{ search_type }}" пошуку:</h3>
+            {% if students %}
+                <ul>
+                {% for student in students %}
+                    <li><b>{{ student['name'] }}</b> - {{ student['grade'] }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Нікого не знайдено.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</body>
+</html>
